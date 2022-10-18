@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="currency.css">
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>currency exchange</title>
+ 
+</head>
+
+<body>
+ <form>
+    <!-- <input id="code" placeholder="code" type="text"> -->
+    <input id="cityname" placeholder="Enter City Name" type="text">
+
+   <button type="button" onclick="city_Name()" >Submit</button>
+  
+</form>
+<div>
+<table id="result">
+
+
+
+  <tr>
+    <th >geo_id</th>
+      <td id ="value1"></td>
+ </tr>
+  <tr> 
+     <th  > latitude</th>
+     <td id="value2"> </td>
+</tr>
+<tr> 
+  <th >longitude </th>
+  <td id="value3"> </td>
+
+</tr>
+  <tr> 
+     <th >name</th>
+      <td id="value4"></td>
+  </tr>
+
+  <tr> 
+    <th >state_or_region</th>
+     <td id="value5"></td>
+ </tr>
+
+</table>
+</div>
+ 
+    </table> 
+     
+    
+    
+     
+    </div>
+
+
+    <script>
+      var myHeaders = new Headers();
+      myHeaders.append("apikey", "QSE3WlB2aGlsL7sY9Y17sKnq9CA9xA6K");
+      
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders
+      };
+      function city_Name() {
+         const cityname=document.getElementById('cityname').value;
+        //  console.log("city name" , currency);
+        fetch("https://api.apilayer.com/geo/country/cities/PAK%2FSINDH", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            
+            data.forEach(element => {
+              console.log(element['name'])
+              if(element['name']== cityname){
+                                let geo_id   =JSON.stringify(element["geo_id"]);
+    let latitude = JSON.stringify(element["latitude"]);
+    let longitude = JSON.stringify(element["longitude"]);
+    let name = JSON.stringify(element["name"]); 
+    let state_or_region= JSON.stringify(element["state_or_region"]);  
+    
+      document.getElementById("value1").innerHTML=geo_id;
+      document.getElementById("value2").innerHTML=latitude;
+      document.getElementById("value3").innerHTML=longitude;
+      document.getElementById("value4").innerHTML=name;
+      document.getElementById("value5").innerHTML=state_or_region;
+              }
+    // ...use `element`...
+          });
+
+    //         for(i = 0 ; i<data.length; i++){
+    //           if(cityname == data['name']){
+    //             let geo_id   =JSON.stringify(data[currency]["geo_id"]);
+    // let latitude = JSON.stringify(data["latitude"]);
+    // let longitude = JSON.stringify(data["longitude"]);
+    // let name = JSON.stringify(data["name"]); 
+    // let state_or_region= JSON.stringify(data["state_or_region"]);  
+    
+    //   document.getElementById("value1").innerHTML=geo_id;
+    //   document.getElementById("value2").innerHTML=latitude;
+    //   document.getElementById("value3").innerHTML=longitude;
+    //   document.getElementById("value4").innerHTML=name;
+    //   document.getElementById("value5").innerHTML=state_or_region;
+             
+    //           }
+    //   
+//             Object.values(data).forEach(([key, value]) => {
+//     console.log(JSON.stringify(`${key} ${value}`));
+// });
+
+
+           });
+  
+    }
+    
+    
+    
+    </script>
+    
+</body>
+
+
+</html>
